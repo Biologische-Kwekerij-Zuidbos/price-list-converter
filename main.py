@@ -2,8 +2,8 @@ import pandas as pd
 import os
 import platform
 
-import processing as proces
-import printer
+import src.processing as proces
+import src.printer as printer
 
 # List all files in the 'input' directory
 input_dirs = os.listdir('./input')
