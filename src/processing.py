@@ -32,7 +32,8 @@ def process_input_files(input_dirs, input_files):
             # and substitute .csv file type
             output_dir,
             engine='openpyxl',
-            index=False
+            index=False,
+            header=False
         )
 
         # Wrap text (prevent overlapping of text)
