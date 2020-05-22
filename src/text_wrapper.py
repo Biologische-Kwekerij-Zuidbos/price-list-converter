@@ -1,18 +1,23 @@
 from openpyxl import load_workbook
 from openpyxl.styles import Alignment
+from openpyxl.utils import get_column_letter
 
 def wrap(dir):
     workbook = load_workbook(dir)
+    worksheet = workbook.active
 
-    for rows in workbook.active.iter_rows():
-        for cell in rows:
-            cell.alignment = Alignment(
-                horizontal='general',
-                vertical='bottom',
-                text_rotation=0,
-                wrap_text=False,
-                shrink_to_fit=False,
-                indent=0
-            )
+    dimensions = {}
+    for row in worksheet.rows:
+        for cell in row:
+            if cell.value:
+                dimensions[cell.column_letter] = max(
+                    (dimensions.get(cell.column_letter, 0),
+                    len(str(cell.value)))
+                ) + 1 / 20
+            
+            cell.alignment = Alignment(horizontal='left')
+
+    for column, value in dimensions.items():
+        worksheet.column_dimensions[column].width = value
     
     workbook.save(dir) 
