@@ -7,6 +7,7 @@ import src.text_wrapper as tw
 
 def dir_to_file_name(dir):
     return path.splitext(path.basename(dir))[0]
+
 def process_input_files(input_dirs, input_files):
     output_dirs = []
 
@@ -20,6 +21,7 @@ def process_input_files(input_dirs, input_files):
         # Insert dates
         df = lc.insert_dates(df)
 
+        # Get the output directory
         output_dir = './output/' + dir_to_file_name(
             input_dirs[index]
         ) + '.xlsx'
@@ -29,7 +31,8 @@ def process_input_files(input_dirs, input_files):
             # Use same name as the corresponding input file
             # and substitute .csv file type
             output_dir,
-            engine='openpyxl'
+            engine='openpyxl',
+            index=False
         )
 
         # Wrap text (prevent overlapping of text)
