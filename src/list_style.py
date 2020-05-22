@@ -1,7 +1,8 @@
 def style_dataframe(df):
     return df.style \
         .apply(color_rows, axis=0) \
-        .apply(color_head, axis=0)
+        .apply(color_head, axis=0) \
+        .apply(color_head_text, axis=0)
 
 def color_rows(series):
     return [
@@ -12,7 +13,14 @@ def color_rows(series):
 
 def color_head(series):
     return [
-        'background-color: #f2f2f2'
+        'background-color: grey'
+        if index == 5 else ''
+        for index, _ in enumerate(series)
+    ]
+
+def color_head_text(series):
+    return [
+        'color: white'
         if index == 5 else ''
         for index, _ in enumerate(series)
     ]
