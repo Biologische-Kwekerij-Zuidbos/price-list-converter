@@ -1,0 +1,4 @@
+hiddenimports = [
+    'pandas',
+    'openpyxl'
+]
