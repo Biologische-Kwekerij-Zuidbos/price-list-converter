@@ -1,30 +1,20 @@
-import pandas as pd
-import os
-import platform
+from subprocess import Popen
 
-import src.processing as proces
-import src.printer as printer
+import src.processing as proc
+import src.input as inp
+import src.printer as pr
 
-# List all files in the 'input' directory
-input_dirs = os.listdir('./input')
-# Only select Excel files
-input_dirs = [
-    './input/' + input_dir
-    for input_dir in input_dirs if input_dir.endswith((
-        '.xls',
-        '.xlsx'
-    )
-)]
-
-input_files = [pd.read_html(input_dir) for input_dir in input_dirs]
+input_dirs = inp.get_dirs()
 
 print('Processing input files...')
 
-output_dirs = proces.process_input_files(
+output_dirs = proc.process_input_files(
     input_dirs,
-    input_files
+    inp.get_readings(input_dirs)
 )
 
-print('Done!')
+inp.remove_files(input_dirs)
 
-printer.print_files(output_dirs)
+pr.print_files(output_dirs)
+
+print('Done!')
