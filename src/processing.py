@@ -2,6 +2,11 @@ import pandas as pd
 import os
 import pdfkit
 
+try:
+    from win32com.client import Dispatch
+except ImportError:
+    pass
+
 import src.list_style as ls
 import src.list_content as lc
 import src.text_wrapper as tw
@@ -16,11 +21,18 @@ def convert_to_pdf(_dir):
     pd.read_excel(_dir) \
         .to_html(html_dir)
     
+    xl = Dispatch('Excel.Application')
+    xl.Workbooks.Open(os.getcwd() + _dir[1:])
+    #xl.Visible = True -- optional
+    xl.Application.Run("SaveHTML")
+    xl.Workbooks.Close
+
     pdfkit.from_file(html_dir, pdf_dir, options={
         'orientation': 'Landscape'
     })
 
-    os.remove(_dir, html_dir)
+    os.remove(_dir)
+    os.remove(html_dir)
 
     return pdf_dir
 
