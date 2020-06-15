@@ -1,15 +1,9 @@
 import pandas as pd
 import os
-import pdfkit
 
-try:
-    from win32com.client import Dispatch
-except ImportError:
-    pass
-
-import src.list_style as ls
-import src.list_content as lc
-import src.text_wrapper as tw
+import text_processing.list_style as ls
+import text_processing.list_content as lc
+import text_processing.text_wrapper as tw
 
 def dir_to_file_name(_dir):
     return os.path.splitext(os.path.basename(_dir))[0]
@@ -20,7 +14,7 @@ def process_input_files(input_dirs, input_files):
     for index, input_file in enumerate(input_files):
         # Concatenate all segments of the file into one DataFrame
         df = pd.concat(tuple(input_file))
-        
+
         # Drop unnecessary column so that
         # the page is not too wide for printing
         df.drop(columns=[3], inplace=True)

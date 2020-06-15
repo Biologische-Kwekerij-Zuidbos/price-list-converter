@@ -1,8 +1,8 @@
 from os import remove
 
-import src.processing as proc
-import src.input as inp
-import src.printer as pr
+import text_processing.processing as proc
+import interface.input as inp
+import interface.printer as pr
 
 def remove_files(dirs):
     for _dir in dirs:
