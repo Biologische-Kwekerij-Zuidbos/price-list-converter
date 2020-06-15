@@ -1,13 +1,15 @@
 from platform import system
-import os
+import subprocess
 
-def print_files(dirs):
-    answer = input(
-        'Print files? (y/n) '
-    ).lower()
+try:
+    from os import startfile
+except ImportError:
+    pass
 
-    if len(answer) > 0 and answer[0] == 'y':
-        for output_dir in dirs:
-            if system() == 'Windows':
-                # Only use os.startfile on Windows system
-                os.startfile(output_dir, 'print')
+def print_files(files):
+    if system() == 'Windows':
+        for file in files:
+            print_file_win(file)
+
+def print_file_win(file):
+    startfile(file, 'print')
