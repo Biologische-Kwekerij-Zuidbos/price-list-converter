@@ -5,8 +5,8 @@ import src.list_style as ls
 import src.list_content as lc
 import src.text_wrapper as tw
 
-def dir_to_file_name(dir):
-    return path.splitext(path.basename(dir))[0]
+def dir_to_file_name(_dir):
+    return path.splitext(path.basename(_dir))[0]
 
 def process_input_files(input_dirs, input_files):
     output_dirs = []
@@ -26,10 +26,11 @@ def process_input_files(input_dirs, input_files):
             input_dirs[index]
         ) + '.xlsx'
 
-        # Style the DataFrame and export it
-        ls.style_dataframe(df).to_excel(
-            # Use same name as the corresponding input file
-            # and substitute .csv file type
+        # Style the DataFrame and get a Styler object
+        styler = ls.style_dataframe(df)
+
+        # Export as an Excel file
+        styler.to_excel(
             output_dir,
             engine='openpyxl',
             index=False,
