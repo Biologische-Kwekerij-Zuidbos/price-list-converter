@@ -1,11 +1,5 @@
 import pandas as pd
 import os
-import pdfkit
-
-try:
-    from win32com.client import Dispatch
-except ImportError:
-    pass
 
 import src.list_style as ls
 import src.list_content as lc
@@ -20,6 +14,7 @@ def process_input_files(input_dirs, input_files):
     for index, input_file in enumerate(input_files):
         # Concatenate all segments of the file into one DataFrame
         df = pd.concat(tuple(input_file))
+        df.drop(columns=[3], inplace=True)
 
         # Fix row and column indices
         df.reset_index(drop=True, inplace=True)
