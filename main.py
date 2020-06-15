@@ -1,8 +1,12 @@
-from subprocess import Popen
+from os import remove
 
 import src.processing as proc
 import src.input as inp
 import src.printer as pr
+
+def remove_files(dirs):
+    for _dir in dirs:
+        remove(_dir)
 
 input_dirs = inp.get_dirs()
 
@@ -13,8 +17,9 @@ output_dirs = proc.process_input_files(
     inp.get_readings(input_dirs)
 )
 
-inp.remove_files(input_dirs)
-
 pr.print_files(output_dirs)
+
+remove_files(input_dirs)
+remove_files(output_dirs)
 
 print('Done!')

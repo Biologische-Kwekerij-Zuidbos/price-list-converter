@@ -27,8 +27,8 @@ def process_input_files(input_dirs, input_files):
         # Insert dates
         df = lc.insert_dates(df)
 
-        # Get the output directory
-        excel_dir = './output/' + dir_to_file_name(
+        # Get the temp directory
+        excel_dir = './temp/' + dir_to_file_name(
             input_dirs[index]
         ) + '.xlsx'
 
