@@ -14,28 +14,6 @@ import src.text_wrapper as tw
 def dir_to_file_name(_dir):
     return os.path.splitext(os.path.basename(_dir))[0]
 
-def convert_to_pdf(_dir):
-    html_dir = './output/' + dir_to_file_name(_dir) + '.html'
-    pdf_dir = './output/' + dir_to_file_name(_dir) + '.pdf'
-
-    pd.read_excel(_dir) \
-        .to_html(html_dir)
-    
-    xl = Dispatch('Excel.Application')
-    xl.Workbooks.Open(os.getcwd() + _dir[1:])
-    #xl.Visible = True -- optional
-    xl.Application.Run("SaveHTML")
-    xl.Workbooks.Close
-
-    pdfkit.from_file(html_dir, pdf_dir, options={
-        'orientation': 'Landscape'
-    })
-
-    os.remove(_dir)
-    os.remove(html_dir)
-
-    return pdf_dir
-
 def process_input_files(input_dirs, input_files):
     output_dirs = []
 
@@ -68,9 +46,6 @@ def process_input_files(input_dirs, input_files):
         # Wrap text (prevent overlapping of text)
         tw.wrap(excel_dir)
 
-        # Convert from .xslx to .pdf
-        output_dir = convert_to_pdf(excel_dir)
-
-        output_dirs.append(output_dir)
+        output_dirs.append(excel_dir)
     
     return output_dirs
