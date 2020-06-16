@@ -1,4 +1,0 @@
-hiddenimports = [
-    'pandas',
-    'openpyxl'
-]
