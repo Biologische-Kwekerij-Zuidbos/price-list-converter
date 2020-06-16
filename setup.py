@@ -1,14 +1,13 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
-    packages=[
-        'interface',
-        'text_processing'
-    ],
-    py_modules=[
+    install_requires=[
         'pandas',
         'openpyxl',
-        'win32api',
-        'win32print'
-    ]
+    ],
+    extras_require={
+        ':sys_platform == "win32"': [
+            'pywin32'
+        ]
+    }
 )
