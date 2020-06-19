@@ -1,9 +1,9 @@
 import pandas as pd
 import os
 
-import text_processing.list_style as ls
-import text_processing.list_content as lc
-import text_processing.text_wrapper as tw
+from text_processing.list_style import style_dataframe
+from text_processing.list_content import insert_dates
+from text_processing.text_wrapper import wrap
 
 def dir_to_file_name(_dir):
     return os.path.splitext(os.path.basename(_dir))[0]
@@ -23,7 +23,7 @@ def process_input_files(input_dirs, input_files):
         df.reset_index(drop=True, inplace=True)
         
         # Insert dates
-        df = lc.insert_dates(df)
+        df = insert_dates(df)
 
         # Get the temp directory
         excel_dir = './temp/' + dir_to_file_name(
@@ -31,7 +31,7 @@ def process_input_files(input_dirs, input_files):
         ) + '.xlsx'
 
         # Style the DataFrame and get a Styler object
-        styler = ls.style_dataframe(df)
+        styler = style_dataframe(df)
 
         # Export as an Excel file
         styler.to_excel(
@@ -42,7 +42,7 @@ def process_input_files(input_dirs, input_files):
         )
 
         # Wrap text (prevent overlapping of text)
-        tw.wrap(excel_dir)
+        wrap(excel_dir)
 
         output_dirs.append(excel_dir)
     

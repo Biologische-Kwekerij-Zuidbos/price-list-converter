@@ -1,23 +1,23 @@
 from os import remove
 
-import text_processing.processing as proc
-import interface.input as inp
-import interface.printer as pr
+from text_processing.processing import process_input_files
+from interface.input import get_dirs, get_readings
+from interface.printer import print_files
 
 def remove_files(dirs):
     for _dir in dirs:
         remove(_dir)
 
-input_dirs = inp.get_dirs()
+input_dirs = get_dirs()
 
 print('Processing input files...')
 
-output_dirs = proc.process_input_files(
+output_dirs = process_input_files(
     input_dirs,
-    inp.get_readings(input_dirs)
+    get_readings(input_dirs)
 )
 
-pr.print_files(output_dirs)
+print_files(output_dirs)
 
 remove_files(input_dirs)
 remove_files(output_dirs)
