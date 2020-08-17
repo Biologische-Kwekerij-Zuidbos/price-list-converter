@@ -8,7 +8,7 @@ def get_dirs():
     root.filenames = filedialog.askopenfilenames(
         initialdir="C:/Downloads",
         title="Select file(s)",
-        filetypes=(("excel files","*.xls"), ("all files","*.*"))
+        filetypes=(("Excel files","*.xls"), ("All files","*.*"))
     )
 
     return root.filenames
