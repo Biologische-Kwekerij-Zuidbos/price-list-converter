@@ -2,7 +2,9 @@ from platform import system
 import subprocess
 
 try:
-    from os import startfile
+    from os import getcwd
+    import win32api
+    import win32print
 except ImportError:
     pass
 
@@ -12,4 +14,11 @@ def print_files(files):
             print_file_win(file)
 
 def print_file_win(file):
-    startfile(file, 'print')
+    win32api.ShellExecute (
+        0,
+        "print",
+        getcwd() + file[1:],
+        '/d:"%s"' % win32print.GetDefaultPrinter(),
+        ".",
+        0
+    )

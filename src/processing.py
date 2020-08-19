@@ -1,12 +1,18 @@
 import pandas as pd
-from os import path
+import os
+import pdfkit
+
+try:
+    from win32com.client import Dispatch
+except ImportError:
+    pass
 
 import src.list_style as ls
 import src.list_content as lc
 import src.text_wrapper as tw
 
 def dir_to_file_name(_dir):
-    return path.splitext(path.basename(_dir))[0]
+    return os.path.splitext(os.path.basename(_dir))[0]
 
 def process_input_files(input_dirs, input_files):
     output_dirs = []
@@ -22,7 +28,7 @@ def process_input_files(input_dirs, input_files):
         df = lc.insert_dates(df)
 
         # Get the output directory
-        output_dir = './output/' + dir_to_file_name(
+        excel_dir = './output/' + dir_to_file_name(
             input_dirs[index]
         ) + '.xlsx'
 
@@ -31,15 +37,15 @@ def process_input_files(input_dirs, input_files):
 
         # Export as an Excel file
         styler.to_excel(
-            output_dir,
+            excel_dir,
             engine='openpyxl',
             index=False,
             header=False
         )
 
         # Wrap text (prevent overlapping of text)
-        tw.wrap(output_dir)
+        tw.wrap(excel_dir)
 
-        output_dirs.append(output_dir)
+        output_dirs.append(excel_dir)
     
     return output_dirs
