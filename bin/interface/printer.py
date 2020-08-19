@@ -16,12 +16,4 @@ def print_files(files):
         print('ERROR: %s system is not supported for printing' % system())
 
 def print_file_win(file):
-    print(os.path.abspath(file))
-    win32api.ShellExecute(
-        0,
-        "print",
-        os.path.abspath(file),
-        '/d:"%s"' % win32print.GetDefaultPrinter(),
-        ".",
-        0
-    )
+    os.system('start "excel" "%s"' % os.path.abspath(file))
