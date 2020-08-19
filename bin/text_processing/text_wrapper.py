@@ -22,6 +22,7 @@ def wrap(_dir):
             cell.alignment = Alignment(horizontal=align)
 
     for column, value in dimensions.items():
-        worksheet.column_dimensions[column].width = value
+        worksheet.column_dimensions[column].width = value + 5
     
-    workbook.save(_dir) 
+    workbook.save(_dir)
+
