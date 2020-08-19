@@ -3,7 +3,7 @@ import os
 
 import text_processing.list_style as ls
 import text_processing.list_content as lc
-import text_processing.text_wrapper as tw`
+import text_processing.text_wrapper as tw
 
 def dir_to_file_name(_dir):
     return os.path.splitext(os.path.basename(_dir))[0]
