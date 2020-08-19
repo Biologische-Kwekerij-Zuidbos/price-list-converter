@@ -17,7 +17,7 @@ def process_input_files(input_dirs, input_files):
         
         # Drop unnecessary columns so that
         # the page is not too wide for printing
-        df.drop(columns=[3, 5], inplace=True)
+        df.drop(columns=[3], inplace=True)
 
         # Fix row and column indices
         df.reset_index(drop=True, inplace=True)
