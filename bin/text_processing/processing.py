@@ -14,9 +14,8 @@ def process_input_files(input_dirs, input_files):
     for index, input_file in enumerate(input_files):
         # Concatenate all segments of the file into one DataFrame
         df = pd.concat(tuple(input_file))
-        df.drop(columns=[3], inplace=True)
-
-        # Drop unnecessary column so that
+        
+        # Drop unnecessary columns so that
         # the page is not too wide for printing
         df.drop(columns=[3, 5], inplace=True)
 
