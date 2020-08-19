@@ -9,6 +9,7 @@ def get_dirs():
         _initialdir = '../temp'
 
     root = Tk()
+    root.withdraw()
     root.filenames = filedialog.askopenfilenames(
         initialdir=_initialdir,
         title="Select file(s)",
