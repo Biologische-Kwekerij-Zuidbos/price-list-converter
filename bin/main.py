@@ -19,7 +19,7 @@ output_dirs = proc.process_input_files(
 
 pr.print_files(output_dirs)
 
-remove_files(input_dirs)
-remove_files(output_dirs)
+#remove_files(input_dirs)
+#remove_files(output_dirs)
 
 print('Done!')

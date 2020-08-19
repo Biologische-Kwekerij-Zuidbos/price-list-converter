@@ -1,12 +1,17 @@
 import pandas as pd
-import os
+from platform import system
 from tkinter import filedialog
 from tkinter import Tk
 
 def get_dirs():
+    _initialdir = 'C:/Downloads'
+    if system() != 'Windows':
+        _initialdir = '../temp'
+
     root = Tk()
+    root.withdraw()
     root.filenames = filedialog.askopenfilenames(
-        initialdir="C:/Downloads",
+        initialdir=_initialdir,
         title="Select file(s)",
         filetypes=(("Excel files","*.xls"), ("All files","*.*"))
     )

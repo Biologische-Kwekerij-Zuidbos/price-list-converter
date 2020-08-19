@@ -18,7 +18,7 @@ def process_input_files(input_dirs, input_files):
 
         # Drop unnecessary column so that
         # the page is not too wide for printing
-        df.drop(columns=[3], inplace=True)
+        df.drop(columns=[3, 5], inplace=True)
 
         # Fix row and column indices
         df.reset_index(drop=True, inplace=True)
@@ -27,7 +27,7 @@ def process_input_files(input_dirs, input_files):
         df = lc.insert_dates(df)
 
         # Get the temp directory
-        excel_dir = './temp/' + dir_to_file_name(
+        excel_dir = '../temp/' + dir_to_file_name(
             input_dirs[index]
         ) + '.xlsx'
 
